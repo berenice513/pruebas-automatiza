@@ -1,0 +1,29 @@
+description: |
+  Navigate to the PROVEEDORES website 
+actors:
+  - actor: WEB
+    segments:
+      - segment: 1
+        actions:
+          - description: Navigate to the LOGIN PROVEEDORES homepage
+            action: org.getopentest.selenium.NavigateTo
+            args:
+              url: http://192.168.100.189:8080/proveedores/proveedores/login
+
+          - description: Type email user 
+            action: org.getopentest.selenium.SendKeys
+            args:
+              locator: { id: username }
+              text: prueba64@gmail.com
+
+          - description: Type password
+            action: org.getopentest.selenium.SendKeys
+            args:
+              locator: { id: password }
+              text: Admin123@
+          
+          - description: Click Acceder button
+            action: org.getopentest.selenium.Click
+            args:
+              locator: { xpath: "//div[4]/button" }
+

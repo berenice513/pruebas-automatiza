@@ -1,0 +1,48 @@
+description: |
+  Se realiza la prueba de inicio de sesion
+actors:
+  - actor: WEB
+    segments:
+      - segment: 1
+        actions:
+          - description: Navega a la página de inicio de sesion
+            action: org.getopentest.selenium.NavigateTo
+            args:
+              url: http://192.168.100.185/login
+
+          - description: Type "usuario" 
+            action: org.getopentest.selenium.SendKeys
+            args:
+              locator: { xpath: "//input[@type='text']" }
+              text: admin
+
+          - description: Type "contraseña" 
+            action: org.getopentest.selenium.SendKeys
+            args:
+              locator: { xpath: "//input[@type='password']" }
+              text: 123456
+
+          - description: click acceder button
+            action: org.getopentest.selenium.Click
+            args:
+              locator: {xpath: "//button" }
+
+          # - description: Pause for 1 second
+          #   action: org.getopentest.selenium.ActionsPause
+          #   args:
+          #     durationMs: 3000
+
+          # - description: carga pagina de inicio de sesion
+          #   action: org.getopentest.selenium.NavigateTo
+          #   args:
+          #     url: http://192.168.100.185
+
+          # - description: Pause for 1 second
+          #   action: org.getopentest.selenium.ActionsPause
+          #   args:
+          #     durationMs: 1000  
+
+          # - description: click en cerrar sesion
+          #   action: org.getopentest.selenium.Click
+          #   args:
+          #     locator: {xpath: "//a[@href='#'" }
