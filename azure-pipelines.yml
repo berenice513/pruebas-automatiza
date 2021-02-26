@@ -1,0 +1,36 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  displayName: ´Mave app/pom.xml´
+  inputs:
+    mavenPomFile: 'app/pom.xml'
+    codeCoverageToolOption: Cobertura
+
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    SourceFolder: '''$(Build.SourcesDirectory)'''
+    Contents: '**/*ja'
+    TargetFolder: '''$(Build.ArtifactStagingDirectory)'''
+    CleanTargetFolder: true
+    preserveTimestamp: true
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  displayName: ´publish artifact:drop´
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+  condition: succeededOrFailed()
